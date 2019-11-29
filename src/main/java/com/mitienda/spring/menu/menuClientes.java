@@ -1,5 +1,7 @@
 package com.mitienda.spring.menu;
 
+import com.mitienda.spring.controllers.CategoryController;
+import com.mitienda.spring.controllers.ClienteController;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,7 +10,7 @@ import com.mitienda.spring.models.Clientes;
 
 public class menuClientes implements crud {
 	List<Clientes> clientesLista = new ArrayList<>();
-	Clientes cli = new Clientes();
+	ClienteController ctrl = ClienteController.getInstance();
 	public static Scanner keyboard = new Scanner(System.in);
 
 	public menuClientes() {
@@ -68,7 +70,7 @@ public class menuClientes implements crud {
 	@Override
 	public void ver() {
 
-		clientesLista = new ArrayList();// cat.list(); // TODO: Por Hacer
+		clientesLista = ctrl.list();
 
 		for (int i = 0; i < clientesLista.size(); i++) {
 
