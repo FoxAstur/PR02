@@ -113,6 +113,12 @@ public class menuCategorias implements crud {
 		eleccion = keyboard.nextLine();
 		int opcion = Integer.parseInt(eleccion);
 
+	    Categoria cat = null;
+	    
+	    cat.getId(eleccion);
+	    
+		ctrl.delete(cat);
+		
 		// TODO: Por Hacer
 		// categoriasLista.get(opcion).delete();
 
