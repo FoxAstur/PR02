@@ -121,7 +121,7 @@ public class menuClientes implements crud {
         Long opcion = Long.parseLong(eleccion);
 
         ctrl.deleteById(opcion);
-
+        
     }
 
     @Override

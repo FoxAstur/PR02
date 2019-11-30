@@ -1,5 +1,6 @@
 package com.mitienda.spring.menu;
 
+import com.mitienda.spring.controllers.FacturaController;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,154 +12,149 @@ import com.mitienda.spring.models.Factura;
 
 public class menuFactura implements crud {
 
-	List<Factura> facturaLista = new ArrayList<>();
-	Factura fac = new Factura();
-	public static Scanner keyboard = new Scanner(System.in);
+    List<Factura> facturaLista = new ArrayList<>();
+    FacturaController ctrl = FacturaController.getInstance();
+    Factura fac = new Factura();
+    public static Scanner keyboard = new Scanner(System.in);
 
-	public menuFactura() {
+    public menuFactura() {
 
-	}
+    }
 
-	public static menuFactura menu = new menuFactura();
+    public static menuFactura menu = new menuFactura();
 
-	public static void mostrarFactura() {
+    public static void mostrarFactura() {
 
-		boolean salida = true;
+        boolean salida = true;
 
-		int opcion;
-		System.out.print("Elige una opcion\n");
+        int opcion;
+        System.out.print("Elige una opcion\n");
 
-		System.out.print("1 para Ver\n");
-		System.out.print("2 para Crear\n");
-		System.out.print("3 para Borrar\n");
-		System.out.print("4 para Modificar\n");
-		System.out.print("5 para Volver al menu Principal\n");
+        System.out.print("1 para Ver\n");
+        System.out.print("2 para Crear\n");
+        System.out.print("3 para Borrar\n");
+        System.out.print("4 para Modificar\n");
+        System.out.print("5 para Volver al menu Principal\n");
 
-		do {
+        do {
 
-			opcion = Integer.parseInt(keyboard.nextLine());
+            opcion = Integer.parseInt(keyboard.nextLine());
 
-			switch (opcion) {
-			case 1:
-				System.out.println("Has elegido ver");
-				menu.ver();
-				break;
-			case 2:
-				System.out.println("Has elegido crear");
-				menu.crear();
-				break;
-			case 3:
-				System.out.println("Has elegido Borrar");
-				menu.borrar();
-				break;
-			case 4:
-				System.out.println("Has elegido modificar");
-				menu.modificar();
-				break;
-			case 5:
-				System.out.println("Has elegido volver al Menu Principal");
-				menuPrincipal.iniciaMenu();
-				break;
-			default:
-				break;
-			}
+            switch (opcion) {
+                case 1:
+                    System.out.println("Has elegido ver");
+                    menu.ver();
+                    break;
+                case 2:
+                    System.out.println("Has elegido crear");
+                    menu.crear();
+                    break;
+                case 3:
+                    System.out.println("Has elegido Borrar");
+                    menu.borrar();
+                    break;
+                case 4:
+                    System.out.println("Has elegido modificar");
+                    menu.modificar();
+                    break;
+                case 5:
+                    System.out.println("Has elegido volver al Menu Principal");
+                    menuPrincipal.iniciaMenu();
+                    break;
+                default:
+                    break;
+            }
 
-		} while (salida);
+        } while (salida);
 
-		System.out.print("Gracias por usar la apliacion");
+        System.out.print("Gracias por usar la apliacion");
 
-	}
+    }
 
-	@Override
-	public void ver() {
+    @Override
+    public void ver() {
 
-		facturaLista = new ArrayList();// fac.list(); // TODO: Por Hacer
+        facturaLista = ctrl.list();
 
-		for (int i = 0; i < facturaLista.size(); i++) {
+        for (int i = 0; i < facturaLista.size(); i++) {
 
-			System.out.println(i + " = " + facturaLista.get(i));
+            System.out.println(i + " = " + facturaLista.get(i));
 
-		}
-	}
+        }
+    }
 
-	@Override
-	public void modificar() {
+    @Override
+    public void modificar() {
 
-		Date fecha = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String eleccion;
+        Date fecha = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String eleccion;
 
-		System.out.println("Dime la posicion del Articulo que quieres Modificar");
-		eleccion = keyboard.nextLine();
-		int opcion = Integer.parseInt(eleccion);
-		facturaLista.get(opcion);
-		int id = facturaLista.get(opcion).getId();
-		// TODO: Por Hacer
-		// fac = (Factura) fac.getByid(id);
+        System.out.println("Dime ID del Factura que quieres Modificar");
+        eleccion = keyboard.nextLine();
+        Long opcion = Long.parseLong(eleccion);
 
-		System.out.println("Dime la fecha de Factura");
-		String nuevaFechaFactura = keyboard.nextLine();
-		try {
-			fecha = sdf.parse(nuevaFechaFactura);
-		} catch (ParseException e) { 
-			e.printStackTrace();
-		}
-		fac.setFecha(fecha);
-		System.out.println("Dime el ID del cliente");
-		int nuevoIdCliente = Integer.parseInt(keyboard.nextLine());
-		fac.setId_cliente(nuevoIdCliente);
-		System.out.println("Dime la Serie de la Factura");
-		int nuevaSerieCliente = Integer.parseInt(keyboard.nextLine());
-		fac.setSerie(nuevaSerieCliente);
+        ctrl.findById(opcion);
 
-		// TODO: Por Hacer
-		// fac.save();
+        System.out.println("Dime la Nueva fecha de Factura");
+        String nuevaFechaFactura = keyboard.nextLine();
+        try {
+            fecha = sdf.parse(nuevaFechaFactura);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        fac.setFecha(fecha);
+        System.out.println("Dime el ID de la Factura");
+        int nuevoIdCliente = Integer.parseInt(keyboard.nextLine());
+        fac.setId_cliente(nuevoIdCliente);
+        System.out.println("Dime la Serie de la Factura");
+        int nuevaSerieCliente = Integer.parseInt(keyboard.nextLine());
+        fac.setSerie(nuevaSerieCliente);
 
-	}
+        ctrl.save(fac);
 
-	@Override
-	public void borrar() {
-		keyboard.reset();
+    }
 
-		String eleccion;
-		System.out.println("Dime la posicion de la Categoria que quieres Borrar");
-		eleccion = keyboard.nextLine();
-		int opcion = Integer.parseInt(eleccion);
+    @Override
+    public void borrar() {
+        keyboard.reset();
 
-		// TODO: Por Hacer
-		// facturaLista.get(opcion).delete();
+        String eleccion;
+        System.out.println("Dime el ID de la Factura que quieres Borrar");
+        eleccion = keyboard.nextLine();
+        Long opcion = Long.parseLong(eleccion);
 
-	}
+        ctrl.deleteById(opcion);
 
-	@Override
-	public void crear() {
+    }
 
-		keyboard.reset();
-		Date fecha = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+    @Override
+    public void crear() {
 
-		System.out.println("Dime la fecha de Factura");
-		String nuevaFechaFactura = keyboard.nextLine();
+        keyboard.reset();
+        Date fecha = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
-		try {
-			fecha = sdf.parse(nuevaFechaFactura);
-		} catch (ParseException e) { 
-			e.printStackTrace();
-		}
+        System.out.println("Dime la fecha de Factura");
+        String nuevaFechaFactura = keyboard.nextLine();
 
-		fac.setFecha(fecha);
-		System.out.println("Dime el ID del cliente de la Factura");
-		int nuevoIdCliente = Integer.parseInt(keyboard.nextLine());
-		fac.setId_cliente(nuevoIdCliente);
-		System.out.println("Dime la Serie de la Factura");
-		int nuevaSerieCliente = Integer.parseInt(keyboard.nextLine());
-		fac.setSerie(nuevaSerieCliente);
+        try {
+            fecha = sdf.parse(nuevaFechaFactura);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
-		// TODO: Por Hacer
-		// fac.save();
+        fac.setFecha(fecha);
+        System.out.println("Dime el ID de la Factura");
+        int nuevoIdCliente = Integer.parseInt(keyboard.nextLine());
+        fac.setId_cliente(nuevoIdCliente);
+        System.out.println("Dime la Serie de la Factura");
+        int nuevaSerieCliente = Integer.parseInt(keyboard.nextLine());
+        fac.setSerie(nuevaSerieCliente);
+        ctrl.save(fac);
+        
+        System.out.println("Se ha insertado el nuevo cliente");
 
-		System.out.println("Se ha insertado el nuevo cliente");
-
-	}
+    }
 
 }
