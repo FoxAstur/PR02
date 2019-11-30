@@ -1,5 +1,5 @@
-
 package com.mitienda.spring.menu;
+
 
 import com.mitienda.spring.controllers.FacturaLineaController;
 import com.mitienda.spring.models.FacturaLinea;
@@ -10,11 +10,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+public class menuFacturaLinea implements crud {
 
-public class menuFacturaLinea implements crud{
-    
     List<FacturaLinea> facturaLineaLista = new ArrayList<>();
-    FacturaLineaController ctrl = new FacturaLineaController.getInstance();
+
+    FacturaLineaController ctrl = FacturaLineaController.getInstance();
+
     FacturaLinea faclin = new FacturaLinea();
     public static Scanner keyboard = new Scanner(System.in);
 
@@ -22,7 +23,7 @@ public class menuFacturaLinea implements crud{
 
     }
 
-    public static menuFactura menu = new menuFactura();
+    public static menuFacturaLinea menu = new menuFacturaLinea();
 
     public static void mostrarFactura() {
 
@@ -87,32 +88,25 @@ public class menuFacturaLinea implements crud{
     @Override
     public void modificar() {
 
-        Date fecha = null;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String eleccion;
 
-        System.out.println("Dime ID del Factura que quieres Modificar");
+        System.out.println("Dime ID del FacturaLinea que quieres Modificar");
         eleccion = keyboard.nextLine();
         Long opcion = Long.parseLong(eleccion);
 
         ctrl.findById(opcion);
+        
+        System.out.println("Dime el nuevo ID de la Factura Linea");
+        String nuevoID = keyboard.nextLine();
+        faclin.setId_factura(Integer.parseInt(nuevoID));
+        System.out.println("Dime el nuevo nombre de la Factura");
+        String nuevoNombre =  keyboard.nextLine();
+        faclin.setNombre(nuevoNombre);
+        System.out.println("Dime el nuevo Precio");
+        String nuevoPrecio =keyboard.nextLine();
+        faclin.setPrecio(Integer.parseInt(nuevoPrecio));
 
-        System.out.println("Dime la Nueva fecha de Factura");
-        String nuevaFechaFactura = keyboard.nextLine();
-        try {
-            fecha = sdf.parse(nuevaFechaFactura);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        fac.setFecha(fecha);
-        System.out.println("Dime el ID de la Factura");
-        int nuevoIdCliente = Integer.parseInt(keyboard.nextLine());
-        fac.setId_cliente(nuevoIdCliente);
-        System.out.println("Dime la Serie de la Factura");
-        int nuevaSerieCliente = Integer.parseInt(keyboard.nextLine());
-        fac.setSerie(nuevaSerieCliente);
-
-        ctrl.save(fac);
+        ctrl.save(faclin);
 
     }
 
@@ -121,7 +115,7 @@ public class menuFacturaLinea implements crud{
         keyboard.reset();
 
         String eleccion;
-        System.out.println("Dime el ID de la Factura que quieres Borrar");
+        System.out.println("Dime el ID de la FacturaLinea que quieres Borrar");
         eleccion = keyboard.nextLine();
         Long opcion = Long.parseLong(eleccion);
 
@@ -133,32 +127,19 @@ public class menuFacturaLinea implements crud{
     public void crear() {
 
         keyboard.reset();
-        Date fecha = null;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+       
+      
+        System.out.println("Dime el ID de la Factura Linea");
+        String nuevoID = keyboard.nextLine();
+        faclin.setId_factura(Integer.parseInt(nuevoID));
+        System.out.println("Dime el nombre de la Factura Linea");
+        String nuevoNombre =  keyboard.nextLine();
+        faclin.setNombre(nuevoNombre);
+        System.out.println("Dime el Precio de la Factura Linea");
+        String nuevoPrecio =keyboard.nextLine();
+        faclin.setPrecio(Integer.parseInt(nuevoPrecio));
 
-        System.out.println("Dime la fecha de Factura");
-        String nuevaFechaFactura = keyboard.nextLine();
-
-        try {
-            fecha = sdf.parse(nuevaFechaFactura);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        fac.setFecha(fecha);
-        System.out.println("Dime el ID de la Factura");
-        int nuevoIdCliente = Integer.parseInt(keyboard.nextLine());
-        fac.setId_cliente(nuevoIdCliente);
-        System.out.println("Dime la Serie de la Factura");
-        int nuevaSerieCliente = Integer.parseInt(keyboard.nextLine());
-        fac.setSerie(nuevaSerieCliente);
-        ctrl.save(fac);
-        
-        System.out.println("Se ha insertado el nuevo cliente");
-
+        ctrl.save(faclin);
     }
 
 }
-
-    
-
