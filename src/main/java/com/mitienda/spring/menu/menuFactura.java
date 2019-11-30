@@ -104,10 +104,10 @@ public class menuFactura implements crud {
             e.printStackTrace();
         }
         fac.setFecha(fecha);
-        System.out.println("Dime el ID de la Factura");
+        System.out.println("Dime el nuevo ID de la Factura");
         int nuevoIdCliente = Integer.parseInt(keyboard.nextLine());
         fac.setId_cliente(nuevoIdCliente);
-        System.out.println("Dime la Serie de la Factura");
+        System.out.println("Dime la nueva Serie de la Factura");
         int nuevaSerieCliente = Integer.parseInt(keyboard.nextLine());
         fac.setSerie(nuevaSerieCliente);
 

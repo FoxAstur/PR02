@@ -74,7 +74,7 @@ public class menuCategorias implements crud {
     @Override
     public void ver() {
 
-        categoriasLista = ctrl.list();// cat.list(); // TODO: Por Hacer
+        categoriasLista = ctrl.list();
 
         for (int i = 0; i < categoriasLista.size(); i++) {
 

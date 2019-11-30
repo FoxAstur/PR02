@@ -3,10 +3,7 @@ package com.mitienda.spring.menu;
 
 import com.mitienda.spring.controllers.FacturaLineaController;
 import com.mitienda.spring.models.FacturaLinea;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
