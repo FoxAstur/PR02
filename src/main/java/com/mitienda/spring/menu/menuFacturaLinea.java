@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.mitienda.spring.menu;
 
-import com.mitienda.spring.controllers.FacturaController;
-import com.mitienda.spring.models.Factura;
+import com.mitienda.spring.controllers.FacturaLineaController;
 import com.mitienda.spring.models.FacturaLinea;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,15 +10,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- *
- * @author Carlos
- */
+
 public class menuFacturaLinea implements crud{
     
-     List<FacturaLinea> facturaLineaLista = new ArrayList<>();
-    FacturaController ctrl = FacturaController.getInstance();
-    Factura fac = new Factura();
+    List<FacturaLinea> facturaLineaLista = new ArrayList<>();
+    FacturaLineaController ctrl = new FacturaLineaController.getInstance();
+    FacturaLinea faclin = new FacturaLinea();
     public static Scanner keyboard = new Scanner(System.in);
 
     public menuFacturaLinea() {
@@ -83,11 +75,11 @@ public class menuFacturaLinea implements crud{
     @Override
     public void ver() {
 
-        facturaLista = ctrl.list();
+        facturaLineaLista = ctrl.list();
 
-        for (int i = 0; i < facturaLista.size(); i++) {
+        for (int i = 0; i < facturaLineaLista.size(); i++) {
 
-            System.out.println(i + " = " + facturaLista.get(i));
+            System.out.println(i + " = " + facturaLineaLista.get(i));
 
         }
     }

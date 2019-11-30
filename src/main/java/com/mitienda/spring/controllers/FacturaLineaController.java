@@ -6,8 +6,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.mitienda.spring.models.Factura;
-import com.mitienda.spring.repositories.FacturaRepository;
+
+import com.mitienda.spring.models.FacturaLinea;
+import com.mitienda.spring.repositories.FacturaLineaRepository;
 
 public class FacturaLineaController {
 
@@ -24,7 +25,7 @@ public class FacturaLineaController {
 	}
 
 	@Autowired
-	private FacturaRepository repository;
+	private FacturaLineaRepository repository;
 
 	/**
 	 * Guarda o Actualiza un objecto
@@ -32,7 +33,7 @@ public class FacturaLineaController {
 	 * @param cat
 	 * @return
 	 */
-	public Factura save(Factura cat) {
+	public FacturaLinea save(FacturaLinea cat) {
 		return repository.save(cat);
 	}
 
@@ -48,9 +49,9 @@ public class FacturaLineaController {
 	 * 
 	 * @return Devuelve todos los Objectos de la Tabla
 	 */
-	public List<Factura> list() {
-		ArrayList<Factura> ret = new ArrayList<>();
-		for (Factura t : repository.findAll()) {
+	public List<FacturaLinea> list() {
+		ArrayList<FacturaLinea> ret = new ArrayList<>();
+		for (FacturaLinea t : repository.findAll()) {
 			ret.add(t);
 		}
 		return ret;
@@ -61,7 +62,7 @@ public class FacturaLineaController {
 	 * 
 	 * @param cat - <strong>TIENE QUE TENER ID</strong>
 	 */
-	public void delete(Factura cat) {
+	public void delete(FacturaLinea cat) {
 		repository.delete(cat);
 	}
 
@@ -80,8 +81,8 @@ public class FacturaLineaController {
 	 * @return Devuelve el Objecto que corresponda con el ID o null en caso de no
 	 *         existir en la base de datos
 	 */
-	public Factura findById(Long id) {
-		Optional<Factura> item = repository.findById(id);
+	public FacturaLinea findById(Long id) {
+		Optional<FacturaLinea> item = repository.findById(id);
 		// item..ifPresent(x -> System.out.println(x)); // Devuelve el objecto si existe
 		if (!item.isPresent()) {
 			return null;
