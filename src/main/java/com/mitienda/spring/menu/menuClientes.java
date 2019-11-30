@@ -88,9 +88,9 @@ public class menuClientes implements crud {
 
         System.out.println("Dime la posicion del Cliente que quieres Modificar");
         eleccion = keyboard.nextLine();
-        int opcion = Integer.parseInt(eleccion);
-        clientesLista.get(opcion);
-
+        Long opcion = Long.parseLong(eleccion);
+        ctrl.findById(opcion);
+        
         System.out.println("Dime el nombre del nuevo Cliente");
         String nuevoCliNombre = keyboard.nextLine();
         cli.setNombre(nuevoCliNombre);
