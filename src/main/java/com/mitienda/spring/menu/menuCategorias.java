@@ -1,16 +1,17 @@
 package com.mitienda.spring.menu;
 
+import com.mitienda.spring.controllers.CategoryController;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.mitienda.spring.controllers.CategoryController;
+
 import com.mitienda.spring.models.Categoria;
 
 public class menuCategorias implements crud {
 
-    CategoryController ctrl = CategoryController.getInstance();
-
+   CategoryController ctrl = new CategoryController().getInstance();
+	
     List<Categoria> categoriasLista = new ArrayList<>();
 
     public static Scanner keyboard = new Scanner(System.in);

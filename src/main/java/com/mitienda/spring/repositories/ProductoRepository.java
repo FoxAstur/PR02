@@ -14,4 +14,9 @@ public interface ProductoRepository extends CrudRepository<Producto, Long> {
 	@Query(value = "select * from productos where id_categoria = ?1", nativeQuery = true)
 	ArrayList<Producto> findByCategoryId(Long idCat);
 
+        
+//        @Query("select * from producto")
+//        @Override
+//        ArrayList<Producto> findAll();
 }
+

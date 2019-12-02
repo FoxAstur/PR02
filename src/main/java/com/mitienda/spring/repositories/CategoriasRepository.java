@@ -12,5 +12,9 @@ import com.mitienda.spring.models.Categoria;
 public interface CategoriasRepository extends CrudRepository<Categoria, Long> {
 
 	@Query(value = "select id,name,roll_no from USER_INFO_TEST where rollNo = ?1", nativeQuery = true)
+                
+                
 	ArrayList<Categoria> findUserUsingRollNo(String rollNo);
+        
+        
 }

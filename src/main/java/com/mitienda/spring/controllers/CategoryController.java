@@ -24,6 +24,8 @@ public class CategoryController {
 
 	@Autowired
 	private CategoriasRepository repository;
+        
+        
 
 	/**
 	 * Guarda o Actualiza un objecto
@@ -50,7 +52,7 @@ public class CategoryController {
 	public List<Categoria> list() {
 		ArrayList<Categoria> ret = new ArrayList<>();
 		System.out.println("CHECK:" + (repository == null));
-
+             
 		for (Categoria t : repository.findAll()) {
 			ret.add(t);
 		}
